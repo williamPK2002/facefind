@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@prisma/client": "^6.17.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2"
+  },
+  "devDependencies": {
+    "prisma": "^6.17.0"
+  }
+}

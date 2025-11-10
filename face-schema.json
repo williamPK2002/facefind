@@ -1,0 +1,9 @@
+﻿{
+  "class": "Face",
+  "description": "Face objects",
+  "properties": [
+    { "name": "name", "dataType": ["string"] },
+    { "name": "source", "dataType": ["string"] },
+    { "name": "notes", "dataType": ["string"] }
+  ]
+}
