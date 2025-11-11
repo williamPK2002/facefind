@@ -10,19 +10,19 @@ export class DeliveriesService {
     return this.weaviateService.createObject('deliveries', createDeliveryDto);
   }
 
-  findAll() {
+  findAll(): Promise<any[]> {
     return this.weaviateService.findAllObjects('deliveries');
   }
 
-  findOne(id: number) {
+  findOne(id: number): Promise<any> {
     return this.weaviateService.getObject('deliveries', id.toString());
   }
 
-  update(id: number, updateDeliveryDto: UpdateDeliveryDto) {
+  update(id: number, updateDeliveryDto: UpdateDeliveryDto): Promise<any> {
     return this.weaviateService.updateObject('deliveries', id.toString(), updateDeliveryDto);
   }
 
-  remove(id: number) {
+  remove(id: number): Promise<any> {
     return this.weaviateService.deleteObject('deliveries', id.toString());
   }
 }

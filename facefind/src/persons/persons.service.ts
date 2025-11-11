@@ -1,26 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
+import { WeaviateService } from 'src/weaviate/weaviate.service';
+
 
 @Injectable()
 export class PersonsService {
+  constructor(private readonly weaviateService: WeaviateService) {}
   create(createPersonDto: CreatePersonDto) {
-    return 'This action adds a new person';
+    return this.weaviateService.createObject('persons', createPersonDto);
   }
 
-  findAll() {
-    return `This action returns all persons`;
+  findAll(): Promise<any[]> {
+    return this.weaviateService.findAllObjects('persons');
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} person`;
+  findOne(id: number): Promise<any> {
+    return this.weaviateService.getObject('persons', id.toString());
   }
 
-  update(id: number, updatePersonDto: UpdatePersonDto) {
-    return `This action updates a #${id} person`;
+  update(id: number, updatePersonDto: UpdatePersonDto): Promise<any> {
+    return this.weaviateService.updateObject('persons', id.toString(), updatePersonDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} person`;
+  remove(id: number): Promise<any> {
+    return this.weaviateService.deleteObject('persons', id.toString());
   }
 }
