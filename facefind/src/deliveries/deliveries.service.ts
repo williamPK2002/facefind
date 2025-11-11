@@ -1,26 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { CreateDeliveryDto } from './dto/create-delivery.dto';
 import { UpdateDeliveryDto } from './dto/update-delivery.dto';
+import { WeaviateService } from 'src/weaviate/weaviate.service';
 
 @Injectable()
 export class DeliveriesService {
+  constructor(private readonly weaviateService: WeaviateService) {}
   create(createDeliveryDto: CreateDeliveryDto) {
-    return 'This action adds a new delivery';
+    return this.weaviateService.createObject('deliveries', createDeliveryDto);
   }
 
   findAll() {
-    return `This action returns all deliveries`;
+    return this.weaviateService.findAllObjects('deliveries');
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} delivery`;
+    return this.weaviateService.getObject('deliveries', id.toString());
   }
 
   update(id: number, updateDeliveryDto: UpdateDeliveryDto) {
-    return `This action updates a #${id} delivery`;
+    return this.weaviateService.updateObject('deliveries', id.toString(), updateDeliveryDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} delivery`;
+    return this.weaviateService.deleteObject('deliveries', id.toString());
   }
 }

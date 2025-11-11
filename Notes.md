@@ -59,10 +59,12 @@ src/
 Database-like entities (planned):
 - events(id, name, time_start, time_end, privacy_mode, opt_in_required, owner_id)
 - photos(id, event_id, url_original, url_web, taken_at, camera, exif_json, phash)
-- faces(id, photo_id, bbox, quality, embed[vector], person_id?, match_score, labeled_by{auto|human})
-- persons(id, university_id?, display_name, consent_flags, gallery_embed[])
 - deliveries(id, person_id, event_id, link_token, sent_via{email/line}, sent_at, open_at, click_at)
 - abuse_reports(id, reporter_id, face_id/photo_id, reason, status)
+
+
+- faces(id, photo_id, bbox, quality, embed[vector], person_id?, match_score, labeled_by{auto|human})
+- persons(id, university_id?, display_name, consent_flags, gallery_embed[vector])
 
 API endpoints (notes):
 

@@ -129,10 +129,44 @@ export class WeaviateService implements OnModuleInit {
   async getObject(className: string, id: string): Promise<any> {
     const group = this.client.collections.use(className);
     const object = await group.query.fetchObjectById(id, {includeVector: true});
-    console.log(object?.properties);
-    console.log(object?.vectors);
     return object;
   }
+
+  async updateObjectWithVector(className: string, id: string, properties: any, vec: number[]): Promise<any> {
+    const group = this.client.collections.use(className);
+    const obj = await group.data.update({
+      id: id,
+      properties: properties,
+      vectors: vec
+    });
+    return obj;
+  }
+
+  async deleteObject(className: string, id: string): Promise<any> {
+    const group = this.client.collections.use(className);
+    return await group.data.deleteById(id);
+
+  } 
+
+  async findAllObjects(className: string): Promise<any[]> {
+    const group = this.client.collections.use(className);
+    const groupLength = await group.length();
+    const result = new Array<any>(groupLength);
+    for await (const obj of group.iterator()) {
+      result.push(obj);
+    }
+    return result;
+  }
+
+  async updateObject(className: string, id: string, properties: any, vec?: number[]): Promise<any> {
+    const group = this.client.collections.use(className);
+      const obj = await group.data.update({
+      id: id,
+      properties: properties
+    });
+    return obj;
+  }
+
 
   getClient(): WeaviateClient {
     if (!this.client) throw new Error('Weaviate client not initialized yet');
